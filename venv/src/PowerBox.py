@@ -78,8 +78,8 @@ class PowerBox:
         # If running on the Raspberry Pi, initialize the GPIO pins and set all relay channels to OFF.
         if(rasp_env):
             GPIO.setmode(GPIO.BCM)
-            for i in range(1-8):
-                print("Setting up pin ", pinList[i])
+            for i in range(1, 9):
+                print("Setting up pin ", i, ":", pinList[i])
                 GPIO.setup(pinList[i], GPIO.OUT)
                 GPIO.output(pinList[i], CHANNEL_OFF)
             print("Running on a Raspberry Pi. GPIO channels initialized")
