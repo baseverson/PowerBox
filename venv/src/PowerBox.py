@@ -149,6 +149,8 @@ class PowerBox:
             None
         """
 
+        print("Starting Flask server on ",self.cfg.getAddress(), ":", self.cfg.getPort())
+
         # Run the flask webservice using the address and port defined in the config file.
         app.run(debug=True,host=self.cfg.getAddress(),port=int(self.cfg.getPort()))
 
