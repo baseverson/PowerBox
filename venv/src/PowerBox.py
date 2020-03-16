@@ -81,6 +81,7 @@ class PowerBox:
             for i in range(1-8):
                 GPIO.setup(pinList[i], GPIO.OUT)
                 GPIO.output(pinList[i], CHANNEL_OFF)
+            print("Running on a Raspberry Pi. GPIO channels initialized")
         else:
             print("Running in a test enviroment!")
 
