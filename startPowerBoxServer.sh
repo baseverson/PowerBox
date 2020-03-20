@@ -2,4 +2,4 @@
 
 source venv/Scripts/activate
 cd venv/src
-./PowerBox.py
+./PowerBox.py $1
