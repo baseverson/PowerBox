@@ -130,7 +130,11 @@ class PowerBox:
                 return "Invalid channel state"
 
             # Command the GPIO pin.
-            GPIO.output(pinList[int(channel)],cmd)
+            if (channel == '*'):
+                for pin in pinList:
+                   GPIO.output(pinList[pin], cmd)
+            else:
+                GPIO.output(pinList[int(channel)],cmd)
 
         # Change the channel state in the local dictionary
         channelStatus[int(channel)] = state
