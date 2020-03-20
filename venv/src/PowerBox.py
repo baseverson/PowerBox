@@ -133,11 +133,12 @@ class PowerBox:
             if (channel == '*'):
                 for pin in pinList:
                    GPIO.output(pinList[pin], cmd)
+                   # Change the channel state in the local dictionary
+                   channelStatus[pin] = state
             else:
                 GPIO.output(pinList[int(channel)],cmd)
-
-        # Change the channel state in the local dictionary
-        channelStatus[int(channel)] = state
+                # Change the channel state in the local dictionary
+                channelStatus[int(channel)] = state
 
         # Return the current state for all channels.
         return json.dumps(channelStatus)
