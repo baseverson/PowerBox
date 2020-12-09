@@ -27,7 +27,15 @@ pinList = {
     5:5,
     6:6,
     7:13,
-    8:19
+    8:19,
+    9:7,
+    10:8,
+    11:25,
+    12:24,
+    13:23,
+    14:18,
+    15:15,
+    16:14
 }
 
 # channelStatus holds the current state of each relay channel.  Initialize all channels to "OFF".
@@ -40,6 +48,14 @@ channelStatus = {
     6:"OFF",
     7:"OFF",
     8:"OFF",
+    9: "OFF",
+    10: "OFF",
+    11: "OFF",
+    12: "OFF",
+    13: "OFF",
+    14: "OFF",
+    15: "OFF",
+    16: "OFF",
 }
 
 # Constants for controlling the Raspberry Pi GPIO pins
@@ -78,7 +94,7 @@ class PowerBox:
         # If running on the Raspberry Pi, initialize the GPIO pins and set all relay channels to OFF.
         if(rasp_env):
             GPIO.setmode(GPIO.BCM)
-            for i in range(1, 9):
+            for i in range(1, 17):
                 print("Setting up pin ", i, ":", pinList[i])
                 GPIO.setup(pinList[i], GPIO.OUT)
                 GPIO.output(pinList[i], CHANNEL_OFF)
