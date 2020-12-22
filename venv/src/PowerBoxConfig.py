@@ -30,3 +30,10 @@ class PowerBoxConfig:
 
     def getAddress(self):
         return self.config.get('General', 'address')
+
+    def getPinList(self):
+        pinList = {}
+        for i in 1..16:
+            pinList[i] = self.config.get('PinList', i)
+
+        return pinList

@@ -19,24 +19,24 @@ import json
 app = Flask(__name__)
 
 # pinList contains the Raspberry Pi GPIO pin numbers used for relay channels 1-8
-pinList = {
-    1:4,
-    2:17,
-    3:27,
-    4:22,
-    5:5,
-    6:6,
-    7:13,
-    8:19,
-    9:7,
-    10:8,
-    11:25,
-    12:24,
-    13:23,
-    14:18,
-    15:15,
-    16:14
-}
+pinList = {}
+#    1:4,
+#    2:17,
+#    3:27,
+#    4:22,
+#    5:5,
+#    6:6,
+#    7:13,
+#    8:19,
+#    9:7,
+#    10:8,
+#    11:25,
+#    12:24,
+#    13:23,
+#    14:18,
+#    15:15,
+#    16:14
+#}
 
 # channelStatus holds the current state of each relay channel.  Initialize all channels to "OFF".
 channelStatus = {
@@ -90,6 +90,9 @@ class PowerBox:
         Returns:
             None
         """
+
+        # Get the pin list from the config file
+        pinList = self.cfg.getPinList()
 
         # If running on the Raspberry Pi, initialize the GPIO pins and set all relay channels to OFF.
         if(rasp_env):
@@ -158,6 +161,20 @@ class PowerBox:
 
         # Return the current state for all channels.
         return json.dumps(channelStatus)
+
+    @app.route('/PowerBox/runBatchCommand', methods=['POST'])
+    def runBatchCommand():
+        """
+        Rest API function. Receive a series of timestamped command and run as a batch.
+
+        Args:
+            None. Handled through the REST request.
+
+        Returns:
+            None.
+        """
+
+        print("runBatchCommand request received.")
 
     def run(self):
         """
