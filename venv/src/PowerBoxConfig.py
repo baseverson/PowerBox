@@ -33,7 +33,7 @@ class PowerBoxConfig:
 
     def getPinList(self):
         pinList = {}
-        for i in 1..16:
-            pinList[i] = self.config.get('PinList', i)
+        for i in range(1, 17):
+            pinList[i] = int(self.config.get('ChannelPins', str(i)))
 
         return pinList

@@ -19,24 +19,24 @@ import json
 app = Flask(__name__)
 
 # pinList contains the Raspberry Pi GPIO pin numbers used for relay channels 1-8
-pinList = {}
-#    1:4,
-#    2:17,
-#    3:27,
-#    4:22,
-#    5:5,
-#    6:6,
-#    7:13,
-#    8:19,
-#    9:7,
-#    10:8,
-#    11:25,
-#    12:24,
-#    13:23,
-#    14:18,
-#    15:15,
-#    16:14
-#}
+pinList = {
+    1:0,
+    2:0,
+    3:0,
+    4:0,
+    5:0,
+    6:0,
+    7:0,
+    8:0,
+    9:0,
+    10:0,
+    11:0,
+    12:0,
+    13:0,
+    14:0,
+    15:0,
+    16:0
+}
 
 # channelStatus holds the current state of each relay channel.  Initialize all channels to "OFF".
 channelStatus = {
@@ -92,7 +92,9 @@ class PowerBox:
         """
 
         # Get the pin list from the config file
-        pinList = self.cfg.getPinList()
+        configPinList = self.cfg.getPinList()
+        for i in range(1, 17):
+            pinList[i] = configPinList[i]
 
         # If running on the Raspberry Pi, initialize the GPIO pins and set all relay channels to OFF.
         if(rasp_env):
@@ -136,7 +138,7 @@ class PowerBox:
         # Extract the desired state (On/Off) from the REST request
         state = request.json['state']
         print("setChannelState request received:")
-        print("    channel: ", channel)
+        print("    channel: ", '"', channel, '"')
         print("    state: ", state)
 
         # If we're running on a Raspberry Pi, command the GPIO pin.
@@ -155,7 +157,11 @@ class PowerBox:
                    # Change the channel state in the local dictionary
                    channelStatus[pin] = state
             else:
-                GPIO.output(pinList[int(channel)],cmd)
+                print("Channel:", channel, "Type:", type(channel))
+                for pin in pinList:
+                    print("Pin:", pin, "Type:", type(pin))
+
+                GPIO.output(pinList[channel],cmd)
                 # Change the channel state in the local dictionary
                 channelStatus[int(channel)] = state
 
