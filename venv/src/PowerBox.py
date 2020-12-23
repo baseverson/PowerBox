@@ -181,7 +181,7 @@ class PowerBox:
         """
 
         print("runBatchCommand request received.")
-        return
+        return json.dumps(channelStatus)
 
     def run(self):
         """
