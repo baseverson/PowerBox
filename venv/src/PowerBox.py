@@ -181,6 +181,7 @@ class PowerBox:
         """
 
         print("runBatchCommand request received.")
+        return
 
     def run(self):
         """
