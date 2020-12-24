@@ -157,7 +157,7 @@ class PowerBox:
                    # Change the channel state in the local dictionary
                    channelStatus[pin] = state
             else:
-                GPIO.output(pinList[channel],cmd)
+                GPIO.output(pinList[int(channel)],cmd)
                 # Change the channel state in the local dictionary
                 channelStatus[int(channel)] = state
 
